@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="it" class="h-100">
 <head>
@@ -49,7 +50,7 @@
 
 
 
-<title>Inserisci Nuovo Elemento</title>
+<title>Modifica Elemento</title>
 </head>
 <body class="d-flex flex-column h-100">
 
@@ -83,7 +84,7 @@
 
 			<div class='card'>
 				<div class='card-header'>
-					<h5>Inserisci nuovo elemento</h5>
+					<h5>Modifica elemento</h5>
 				</div>
 				<div class='card-body'>
 
@@ -93,47 +94,77 @@
 
 
 					<form method="post"
-						action="${pageContext.request.contextPath}/ExecuteInsertRegistaServlet"
+						action="${pageContext.request.contextPath}/ExecuteEditRegistaServlet"
 						class="row g-3" novalidate="novalidate"
 						onsubmit="return validateForm()">
 
 
 						<div class="col-md-6">
 							<label for="nome" class="form-label">Nome <span
-								class="text-danger">*</span></label> <input type="text" name="nome"
-								id="nome" class="form-control" placeholder="Inserire il nome"
-								value="${insert_regista_attr.nome }" required>
+								class="text-danger">*</span></label>
+							<c:if test="${edit_regista_attr.nome != null }">
+								<input type="text" name="nome" id="nome" class="form-control"
+									placeholder="Inserire il nome"
+									value="${edit_regista_attr.nome }" required>
+							</c:if>
+							<c:if test="${edit_regista_attr.nome == null }">
+								<input type="text" name="nome" id="nome" class="form-control"
+									placeholder="Inserire il nome" value="" required>
+							</c:if>
 							<div class="invalid-feedback">Campo obbligatorio</div>
 						</div>
 
 						<div class="col-md-6">
 							<label for="cognome" class="form-label">Cognome <span
-								class="text-danger">*</span></label> <input type="text" name="cognome"
-								id="cognome" class="form-control"
-								placeholder="Inserire il cognome"
-								value="${insert_regista_attr.cognome }" required>
+								class="text-danger">*</span></label>
+							<c:if test="${edit_regista_attr.cognome != null}">
+								<input type="text" name="cognome" id="cognome"
+									class="form-control" placeholder="Inserire il cognome"
+									value="${edit_regista_attr.cognome }" required>
+							</c:if>
+							<c:if test="${edit_regista_attr.cognome == null}">
+								<input type="text" name="cognome" id="cognome"
+									class="form-control" placeholder="Inserire il cognome" value=""
+									required>
+							</c:if>
 							<div class="invalid-feedback">Campo obbligatorio</div>
 						</div>
 
 						<div class="col-md-6">
 							<label for="nickName" class="form-label">Nickname <span
-								class="text-danger">*</span></label> <input type="text"
-								class="form-control" name="nickName" id="nickName"
-								placeholder="Inserire il nickname"
-								value="${insert_regista_attr.nickName }" required>
+								class="text-danger">*</span></label>
+							<c:if test="${edit_regista_attr.nickName != null }">
+								<input type="text" class="form-control" name="nickName"
+									id="nickName" placeholder="Inserire il nickname"
+									value="${edit_regista_attr.nickName }" required>
+							</c:if>
+							<c:if test="${edit_regista_attr.nickName == null }">
+								<input type="text" class="form-control" name="nickName"
+									id="nickName" placeholder="Inserire il nickname" value=""
+									required>
+							</c:if>
 							<div class="invalid-feedback">Campo obbligatorio</div>
+
 						</div>
 
-						<fmt:parseDate value="${insert_regista_attr.dataDiNascita}"
+						<!--<fmt:parseDate value="${edit_regista_attr.dataDiNascita}"
 							pattern="yyyy-MM-dd" var="localDateToBeParsed" type="date" />
 						<fmt:formatDate pattern="yyyy-MM-dd"
-							value="${localDateToBeParsed}" var="parsedDate" />
+							value="${localDateToBeParsed}" var="parsedDate" /> -->
 						<div class="col-md-3">
 							<label for="dataDiNascita" class="form-label">Data di
 								Nascita <span class="text-danger">*</span>
-							</label> <input class="form-control" id="dataDiNascita" type="date"
+							</label>
+							<c:if test="${edit_regista_attr.dataDiNascita != null}"></c:if>
+							<input class="form-control" id="dataDiNascita" type="date"
 								placeholder="dd/MM/yy" title="formato : gg/mm/aaaa"
-								name="dataDiNascita" required value="${parsedDate}">
+								name="dataDiNascita" required
+								value="${edit_regista_attr.dataDiNascita}">
+							<c:if test="${edit_regista_attr.dataDiNascita == null}">
+								<input class="form-control" id="dataDiNascita" type="date"
+									placeholder="dd/MM/yy" title="formato : gg/mm/aaaa"
+									name="dataDiNascita" required value="">
+							</c:if>
 							<div class="invalid-feedback">Campo obbligatorio</div>
 						</div>
 
@@ -143,15 +174,17 @@
 								id="sesso" name="sesso" required>
 								<option value="" selected>- Selezionare -</option>
 								<option value="MASCHIO"
-									${insert_regista_attr.sesso == 'MASCHIO'?'selected':''}>M</option>
+									${edit_regista_attr.sesso == 'MASCHIO'?'selected':''}>M</option>
 								<option value="FEMMINA"
-									${insert_regista_attr.sesso == 'FEMMINA'?'selected':''}>F</option>
+									${edit_regista_attr.sesso == 'FEMMINA'?'selected':''}>F</option>
 							</select>
 							<div class="invalid-feedback">Campo obbligatorio</div>
 						</div>
 
 
 						<div class="col-12">
+							<input type="hidden" name="idRegistaToEdit"
+								value="${edit_regista_attr.id}">
 							<button type="submit" name="insertSubmit" value="insertSubmit"
 								id="insertSubmit" class="btn btn-primary">Conferma</button>
 						</div>

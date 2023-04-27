@@ -36,7 +36,7 @@ public class RegistaDAOImpl implements RegistaDAO {
 	@Override
 	public Regista findByIdWithFilms(Long idInput) throws Exception {
 		TypedQuery<Regista> query = entityManager
-				.createQuery("select r from Regista r join fetch r.films f where r.id = ?1", Regista.class);
+				.createQuery("select r from Regista r left join fetch r.films f where r.id = ?1", Regista.class);
 		query.setParameter(1, idInput);
 
 		return query.getResultStream().findFirst().orElse(null);
