@@ -44,6 +44,13 @@ public class Film {
 		this.regista = regista;
 	}
 	
+	public Film(String titolo, String genere, LocalDate dataPubblicazione, Integer minutiDurata) {
+		this.titolo = titolo;
+		this.genere = genere;
+		this.dataPubblicazione = dataPubblicazione;
+		this.minutiDurata = minutiDurata;
+	}
+	
 	public Film(String titolo, String genere) {
 		this.titolo = titolo;
 		this.genere = genere;
