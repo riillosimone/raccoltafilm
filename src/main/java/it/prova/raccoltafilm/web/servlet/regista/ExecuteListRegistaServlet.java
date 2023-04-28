@@ -36,6 +36,8 @@ public class ExecuteListRegistaServlet extends HttpServlet {
 				request.setAttribute("errorMessage", "Attenzione si è verificato un errore.");
 			if (StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("NOT_FOUND"))
 				request.setAttribute("errorMessage", "Elemento non trovato.");
+			if (StringUtils.isNotBlank(operationResult) && operationResult.equalsIgnoreCase("ERROR_FILM_ESISTENTI"))
+				request.setAttribute("errorMessage", "Attenzione! Stai cercando di rimuovere un regista con film associati.");
 
 			request.setAttribute("registi_list_attribute", registaService.listAllElements());
 		} catch (Exception e) {

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import it.prova.raccoltafilm.model.Film;
 import it.prova.raccoltafilm.service.FilmService;
 import it.prova.raccoltafilm.service.MyServiceFactory;
-import it.prova.raccoltafilm.service.RegistaService;
 import it.prova.raccoltafilm.utility.UtilityForm;
 
 @WebServlet("/ExecuteSearchFilmServlet")
@@ -20,7 +19,6 @@ public class ExecuteSearchFilmServlet extends HttpServlet {
 
 	// injection del Service
 	private FilmService filmService;
-	private RegistaService registaService;
 
 	public ExecuteSearchFilmServlet() {
 		this.filmService = MyServiceFactory.getFilmServiceInstance();

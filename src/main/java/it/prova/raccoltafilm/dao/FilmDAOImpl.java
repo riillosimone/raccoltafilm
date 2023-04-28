@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.lang3.StringUtils;
 
 import it.prova.raccoltafilm.model.Film;
-import it.prova.raccoltafilm.model.Regista;
 
 public class FilmDAOImpl implements FilmDAO {
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import it.prova.raccoltafilm.dao.RegistaDAO;
+import it.prova.raccoltafilm.exceptions.RegistaConFilm;
 import it.prova.raccoltafilm.model.Regista;
 import it.prova.raccoltafilm.web.listener.LocalEntityManagerFactoryListener;
 
@@ -139,8 +140,13 @@ public class RegistaServiceImpl implements RegistaService {
 			// uso l'injection per il dao
 			registaDAO.setEntityManager(entityManager);
 
+			Regista registaToRemove = registaDAO.findOne(idRegista).orElse(null);
 			// eseguo quello che realmente devo fare
-			registaDAO.delete(registaDAO.findOne(idRegista).orElse(null));
+			if (registaToRemove.getFilms().size() > 0) {
+				throw new RegistaConFilm();
+			}
+
+			registaDAO.delete(registaToRemove);
 
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

@@ -12,7 +12,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import it.prova.raccoltafilm.model.Film;
 import it.prova.raccoltafilm.service.FilmService;
 import it.prova.raccoltafilm.service.MyServiceFactory;
-import it.prova.raccoltafilm.service.RegistaService;
 import it.prova.raccoltafilm.utility.UtilityForm;
 
 /**
@@ -22,13 +21,11 @@ import it.prova.raccoltafilm.utility.UtilityForm;
 public class ExecuteEditFilmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private RegistaService registaService;
 
 	private FilmService filmService;
 
 	public ExecuteEditFilmServlet() {
 		this.filmService = MyServiceFactory.getFilmServiceInstance();
-		this.registaService = MyServiceFactory.getRegistaServiceInstance();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
