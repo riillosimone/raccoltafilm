@@ -44,6 +44,9 @@
 				</div>
 				<div class='card-body'>
 
+					<a class="btn btn-primary "
+						href="${pageContext.request.contextPath}/admin/PrepareInsertUtenteServlet">Add
+						New</a>
 					<div class='table-responsive'>
 						<table class='table table-striped '>
 							<thead>
@@ -52,6 +55,7 @@
 									<th>Cognome</th>
 									<th>Username</th>
 									<th>Data Creazione</th>
+									<th>Azioni</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -63,7 +67,10 @@
 										<td><fmt:parseDate value="${utenteItem.dateCreated}"
 												pattern="yyyy-MM-dd" var="localDateToBeParsed" type="date" />
 											<fmt:formatDate pattern="dd/MM/yyyy"
-												value="${localDateToBeParsed}" /></td>
+												value="${localDateToBeParsed}" />
+										<td><a class="btn  btn-sm btn-outline-secondary"
+											href="${pageContext.request.contextPath}/admin/ExecuteVisualizzaUtenteServlet?idUtente=${utenteItem.id }">Visualizza</a>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

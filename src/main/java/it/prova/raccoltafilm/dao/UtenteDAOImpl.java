@@ -35,6 +35,14 @@ public class UtenteDAOImpl implements UtenteDAO {
 		Utente result = entityManager.find(Utente.class, id);
 		return result != null ? Optional.of(result) : Optional.empty();
 	}
+	
+	@Override
+	public Utente findByIdWithRuolo(Long idInput) throws Exception {
+		TypedQuery<Utente> query = entityManager.createQuery("select u from Utente u left join fetch u.ruoli r where u.id =?1", Utente.class);
+		query.setParameter(1, idInput);
+		return query.getResultStream().findFirst().orElse(null);
+	}
+	
 
 	@Override
 	public void update(Utente utenteInstance) throws Exception {
@@ -125,6 +133,8 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 		return typedQuery.getResultList();
 	}
+
+	
 	
 
 }

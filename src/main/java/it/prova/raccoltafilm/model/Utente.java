@@ -61,6 +61,13 @@ public class Utente {
 		this.cognome = cognome;
 	}
 
+	public Utente(String username, String password, String nome, String cognome) {
+		this.username = username;
+		this.password = password;
+		this.nome = nome;
+		this.cognome = cognome;
+	}
+	
 
 	public Utente(String username, String password, String nome, String cognome, LocalDate dateCreated) {
 		this.username = username;
